@@ -1,1 +1,1 @@
-# dufs
+# dufs distroless & rootless
