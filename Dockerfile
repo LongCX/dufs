@@ -1,10 +1,14 @@
 FROM sigoden/dufs AS src
 
-FROM gcr.io/distroless/cc-debian12:nonroot
-COPY --chown=nonroot:nonroot --from=src /bin/dufs /app/dufs
+FROM alpine:latest AS tz
+RUN apk add --no-cache tzdata
 
-USER nonroot
+FROM scratch
+COPY --chown=65532:65532 --from=src /bin/dufs /app/dufs
+COPY --chown=65532:65532 --from=tz /usr/share/zoneinfo/Asia/Ho_Chi_Minh /etc/localtime
+
 VOLUME ["/config"]
-ENV TZ=Asia/Ho_Chi_Minh
+
+USER 65532:65532
 
 ENTRYPOINT ["/app/dufs"]
