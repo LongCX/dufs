@@ -11,8 +11,6 @@ COPY --chown=65532:65532 --from=src /bin/dufs /app/dufs
 COPY --chown=65532:65532 --from=tz /usr/share/zoneinfo/Asia/Ho_Chi_Minh /etc/localtime
 COPY --chown=65532:65532 --from=distroless-localhealth / /
 
-VOLUME ["/config"]
-
 EXPOSE 6970
 
 HEALTHCHECK --interval=15s --timeout=2s --start-period=5s \
